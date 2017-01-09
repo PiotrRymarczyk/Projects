@@ -1,11 +1,13 @@
 ﻿# Projects
 Wszystkie moje projekty
 
-Tu będą moje projekty:
+Tu beda moje projekty:
 
-Nauka - katalog z nauką programowania
+Nauka - katalog z nauka programowania
+
 Nauka/Python
+
 Nauka/Java
 
-Apps - a tu będą moje programy
+Apps - a tu beda moje programy
 
