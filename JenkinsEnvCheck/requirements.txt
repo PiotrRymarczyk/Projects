@@ -1,0 +1,9 @@
+selenium
+nose
+nose-htmloutput
+rednose
+pylint
+coverage
+mock
+ddt
+behave
