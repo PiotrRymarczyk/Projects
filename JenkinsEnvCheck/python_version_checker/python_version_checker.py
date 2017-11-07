@@ -12,8 +12,8 @@ def get_python_version():
     '''
     return python version (major,minor,micro)
     '''
-    (a,b,c,d,e) = sys.version_info
-    return (a,b,c)
+    (major_version, minor_version, micro_version, not_important, dont_care) = sys.version_info
+    return (major_version, minor_version, micro_version)
 
 def main():
     '''
