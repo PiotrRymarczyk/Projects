@@ -21,7 +21,7 @@ class Test_PythonVersion(unittest.TestCase):
     def test_check_if_3(self):
         (result,b,c) =  get_python_version()
         message = 'Major version is {0}, expected 3'.format(result)
-        self.assertEqual(result, 3, message)
+        self.assertEqual(result, 2, message)
     
     def test_check_if_2(self):
         (result,b,c) =  get_python_version()
