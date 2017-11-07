@@ -10,6 +10,7 @@ UnitTests for Python Version
 
 import unittest
 import sys
+from python_version_checker.python_version_checker import  get_python_version
 
 
 class Test_PythonVersion(unittest.TestCase):
@@ -18,12 +19,12 @@ class Test_PythonVersion(unittest.TestCase):
     '''
     
     def test_check_if_3(self):
-        (result,b,c,d,e) = sys.version_info
+        (result,b,c) =  get_python_version():
         message = 'Major version is {0}, expected 3'.format(result)
         self.assertEqual(result, 3, message)
     
     def test_check_if_2(self):
-        (result,b,c,d,e) = sys.version_info
+        (result,b,c) =  get_python_version():
         message = 'Major version is {0}, expected 2'.format(result)
         self.assertEqual(result, 2, message)
 
