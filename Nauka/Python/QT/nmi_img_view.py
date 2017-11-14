@@ -6,7 +6,7 @@ Modified on 2017/11/14
 
 '''
 import sys
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, QGridLayout
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, QGridLayout, QTabWidget
 from PyQt5.QtWidgets import QLabel, QMessageBox
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QFileInfo
