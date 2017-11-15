@@ -6,8 +6,9 @@ Modified on 2017/11/14
 
 '''
 import sys
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, QGridLayout, QTabWidget
-from PyQt5.QtWidgets import QLabel, QMessageBox
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, QMessageBox
+from PyQt5.QtWidgets import QLabel, QGridLayout, QTabWidget
+#from PyQt5.QtWidgets import QStyleFactory
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QFileInfo
 
@@ -21,15 +22,29 @@ class ImageViewer(QWidget):
         initialize image viewer
         '''
         super().__init__()
-        self.title = 'No Magic Involved - image viewer'
+        self.title = 'Prints Organizer'
         self.left = 50
         self.top = 50
         self.width = 600
         self.height = 600
         self.supported_image_types = ['JPG', 'JPEG', 'PNG']
+
+        # set in create_directory_view()
+        self.model = None
+        self.tree = None
+
+        # set in create_info_panel()
+        self.info_panel = None
+
+        # set in create_date_tab()
+        self.date_view_tab = None
+
+        # set in create_gui_printed_tab()
+        self.printed_view_tab = None
+
         self.create_gui()
 
-    def create_directory_view(self):
+    def create_gui_directory_view(self):
         '''
         create user interface - tab with directory tree view
         '''
@@ -52,7 +67,7 @@ class ImageViewer(QWidget):
         self.tree.setWindowTitle("Dir View")
         self.tree.resize(600, 800)
 
-    def create_info_panel(self):
+    def create_gui_info_panel(self):
         '''
         create user interface - panel with info
         '''
@@ -60,11 +75,18 @@ class ImageViewer(QWidget):
         self.info_panel.resize(600, 800)
         self.info_panel.setToolTip('Loaded image :)')
 
-    def create_date_tree_view_tab (self):
+    def create_gui_date_tab(self):
+        '''
+        create user interface - tab with pictures in tree view with nodes year/month/day
+        '''
         self.date_view_tab = QLabel("Tutaj bedzie TreeView rok/miesiac/dzien")
 
-    def create_printed_tree_view_tab (self):
-        self.printed_view_tab = QLabel("Tutaj bedzie TreeView rok/miesiac/dzien - wydrukowane zdjecia")
+    def create_gui_printed_tab(self):
+        '''
+        create user interface - tab with printed pictures in tree view with nodes year/month/day
+        '''
+        message = "Tutaj bedzie TreeView rok/miesiac/dzien - wydrukowane zdjecia"
+        self.printed_view_tab = QLabel(message)
 
     def create_gui(self):
         '''
@@ -73,22 +95,22 @@ class ImageViewer(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
-        self.create_directory_view()
-        self.create_date_tree_view_tab()
-        self.create_printed_tree_view_tab()
-        self.create_info_panel()
+        self.create_gui_directory_view()
+        self.create_gui_date_tab()
+        self.create_gui_printed_tab()
+        self.create_gui_info_panel()
 
         self.tabs = QTabWidget()
         self.tabs.addTab(self.tree,"Directories")
         self.tabs.addTab(self.date_view_tab,"Date")
         self.tabs.addTab(self.printed_view_tab,"Printed")
 
-        windowLayout = QGridLayout()
-        windowLayout.addWidget(self.tabs, 0, 0)
-        windowLayout.addWidget(self.info_panel, 0, 1)
-        windowLayout.setColumnMinimumWidth(0, 600)
-        windowLayout.setColumnMinimumWidth(1, 600)
-        self.setLayout(windowLayout)
+        main_window_layout = QGridLayout()
+        main_window_layout.addWidget(self.tabs, 0, 0)
+        main_window_layout.addWidget(self.info_panel, 0, 1)
+        main_window_layout.setColumnMinimumWidth(0, 600)
+        main_window_layout.setColumnMinimumWidth(1, 600)
+        self.setLayout(main_window_layout)
         self.resize(800, 800)
         self.show()
 
@@ -128,6 +150,10 @@ class ImageViewer(QWidget):
             event.ignore()
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = ImageViewer()
-    sys.exit(app.exec_())
+    myQtApplication = QApplication(sys.argv)
+    #myQtApplication.setStyle(QStyleFactory.create('Fusion'))
+    #print(QStyleFactory.keys())
+    #myQtApplication.aboutQt()
+    #ex = ImageViewer()
+    #ex.setStyle(QStyleFactory.create('Fusion'))
+    sys.exit(myQtApplication.exec_())
